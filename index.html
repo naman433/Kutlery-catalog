@@ -32,22 +32,308 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream-soft);color:var(--i
 @media(max-width:700px){.nav-cta{display:none;}}
 
 /* === HERO === */
-.hero{background:var(--green);color:var(--cream);padding:100px 5vw 80px;position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 25%, rgba(201,169,97,0.08), transparent 50%),radial-gradient(circle at 85% 75%, rgba(201,169,97,0.05), transparent 50%);}
-.hero::after{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg, rgba(245,239,226,0.015) 0 1px, transparent 1px 8px);pointer-events:none;}
-.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%;}
-.hero-eyebrow{display:inline-block;font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:30px;border-bottom:1px solid rgba(201,169,97,0.4);padding-bottom:8px;}
-.hero h1{font-family:'Fraunces',serif;font-size:clamp(56px,9vw,128px);line-height:0.95;font-weight:400;letter-spacing:-2px;margin-bottom:30px;}
-.hero h1 em{font-style:italic;color:var(--gold);font-weight:300;}
-.hero-sub{max-width:620px;font-size:18px;font-weight:300;color:rgba(245,239,226,0.85);margin-bottom:50px;}
-.hero-stats{display:flex;gap:60px;flex-wrap:wrap;padding-top:36px;border-top:1px solid rgba(201,169,97,0.2);}
-.hero-stat .num{font-family:'Fraunces',serif;font-size:42px;color:var(--gold);font-weight:500;display:block;line-height:1;}
-.hero-stat .lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,226,0.6);margin-top:8px;display:block;}
-.ornament{position:absolute;right:5vw;top:50%;transform:translateY(-50%);width:360px;height:360px;border:1px solid rgba(201,169,97,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1;}
-.ornament::before{content:'';position:absolute;inset:28px;border:1px solid rgba(201,169,97,0.18);border-radius:50%;}
-.ornament-inner{font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:var(--gold);text-align:center;line-height:1.2;}
-.ornament-inner small{display:block;font-size:9px;letter-spacing:4px;font-style:normal;text-transform:uppercase;color:rgba(201,169,97,0.6);margin-top:10px;}
-@media(max-width:1000px){.ornament{display:none;}}
+.hero{
+  background:var(--green);
+  color:var(--cream);
+  padding:90px 5vw 70px;
+  position:relative;
+  overflow:hidden;
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(201,169,97,0.10), transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(201,169,97,0.06), transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(245,239,226,0.06) 1px, transparent 0);
+  background-size:32px 32px;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* HUGE BG letters K V */
+.hero-bg-letters{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+.bgl{
+  position:absolute;
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  color:rgba(201,169,97,0.06);
+  font-size:clamp(360px, 50vw, 720px);
+  line-height:0.8;
+  letter-spacing:-0.05em;
+  user-select:none;
+}
+.bgl1{ top:-8%; left:-4%; transform:rotate(-4deg); animation:float1 22s ease-in-out infinite; }
+.bgl2{ bottom:-12%; right:-6%; transform:rotate(6deg); animation:float2 24s ease-in-out infinite; }
+@keyframes float1{ 0%,100%{transform:translate(0,0) rotate(-4deg);} 50%{transform:translate(2vw,1vh) rotate(-3deg);} }
+@keyframes float2{ 0%,100%{transform:translate(0,0) rotate(6deg);} 50%{transform:translate(-2vw,-1vh) rotate(7deg);} }
+
+/* Marquee at top */
+.hero-marquee{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:38px;
+  border-bottom:1px solid rgba(201,169,97,0.18);
+  overflow:hidden;
+  z-index:2;
+  background:rgba(8,35,25,0.4);
+}
+.marquee-track{
+  display:flex;
+  gap:28px;
+  white-space:nowrap;
+  align-items:center;
+  height:100%;
+  animation:marquee 38s linear infinite;
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:500;
+}
+.marquee-track span{flex-shrink:0;}
+@keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+.hero-inner{
+  position:relative;
+  z-index:3;
+  max-width:1300px;
+  margin:0 auto;
+  width:100%;
+  padding-top:30px;
+}
+
+/* meta line */
+.hero-meta{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:40px;
+  opacity:0;
+  animation:fadeUp 0.8s 0.2s forwards;
+}
+.hero-meta-dot{
+  width:6px;height:6px;
+  background:var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 0 4px rgba(201,169,97,0.15);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{box-shadow:0 0 0 4px rgba(201,169,97,0.15);} 50%{box-shadow:0 0 0 8px rgba(201,169,97,0.05);} }
+
+/* BIG brand name */
+.hero-brand{
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  line-height:0.85;
+  letter-spacing:-0.04em;
+  margin-bottom:36px;
+}
+.brand-line{
+  display:block;
+  overflow:hidden;
+}
+.line1 .word{
+  font-size:clamp(72px, 13vw, 200px);
+  color:var(--cream);
+  display:inline-block;
+  transform:translateY(110%);
+  animation:slideUp 1s 0.4s cubic-bezier(.2,.8,.2,1) forwards;
+  font-style:italic;
+  font-weight:400;
+}
+.line2 .word{
+  font-size:clamp(72px, 13vw, 200px);
+  color:var(--gold);
+  display:inline-block;
+  transform:translateY(110%);
+  animation:slideUp 1s 0.6s cubic-bezier(.2,.8,.2,1) forwards;
+  font-weight:600;
+  letter-spacing:-0.05em;
+  margin-left:6vw;
+}
+@keyframes slideUp{ to{transform:translateY(0);} }
+
+.hero-tag{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:24px;
+  opacity:0;
+  animation:fadeUp 0.8s 1.1s forwards;
+}
+.tag-rule{
+  width:60px;
+  height:1px;
+  background:var(--gold);
+}
+.tag-text{
+  font-family:'Fraunces',serif;
+  font-size:clamp(20px,2.4vw,30px);
+  color:var(--cream);
+  font-weight:400;
+}
+.tag-text em{
+  font-style:italic;
+  color:var(--gold);
+}
+
+.hero-sub{
+  max-width:560px;
+  font-size:16px;
+  font-weight:300;
+  color:rgba(245,239,226,0.78);
+  margin-bottom:44px;
+  opacity:0;
+  animation:fadeUp 0.8s 1.3s forwards;
+  line-height:1.65;
+}
+
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:60px;
+  opacity:0;
+  animation:fadeUp 0.8s 1.5s forwards;
+}
+.hero-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 28px;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-decoration:none;
+  font-weight:500;
+  transition:all 0.3s;
+  cursor:pointer;
+  border-radius:2px;
+}
+.hero-btn.primary{
+  background:var(--gold);
+  color:var(--green-deep);
+}
+.hero-btn.primary:hover{
+  background:var(--gold-bright);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(201,169,97,0.3);
+}
+.hero-btn.ghost{
+  background:transparent;
+  color:var(--cream);
+  border:1px solid rgba(245,239,226,0.3);
+}
+.hero-btn.ghost:hover{
+  border-color:var(--cream);
+  background:rgba(245,239,226,0.06);
+}
+
+.hero-strip{
+  display:inline-flex;
+  align-items:center;
+  gap:30px;
+  padding:18px 26px;
+  background:rgba(245,239,226,0.04);
+  border:1px solid rgba(201,169,97,0.18);
+  border-radius:4px;
+  opacity:0;
+  animation:fadeUp 0.8s 1.7s forwards;
+}
+.strip-item{display:flex;flex-direction:column;align-items:flex-start;}
+.strip-num{
+  font-family:'Fraunces',serif;
+  font-size:30px;
+  color:var(--gold);
+  font-weight:600;
+  line-height:1;
+}
+.strip-lbl{
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:rgba(245,239,226,0.6);
+  margin-top:4px;
+}
+.strip-sep{
+  width:1px;
+  height:32px;
+  background:rgba(201,169,97,0.25);
+}
+
+/* Circular stamp on right side */
+.hero-side{
+  position:absolute;
+  right:-90px;
+  top:50%;
+  transform:translateY(-50%);
+  width:280px;
+  height:280px;
+  z-index:1;
+  pointer-events:none;
+}
+.side-stamp{
+  width:100%;
+  height:100%;
+  animation:spin 28s linear infinite;
+}
+.stamp-arc{
+  display:block;
+  width:100%;height:100%;
+}
+.side-stamp::before{
+  content:'';
+  position:absolute;inset:0;
+  border:1px solid rgba(201,169,97,0.25);
+  border-radius:50%;
+}
+.side-stamp::after{
+  content:'';
+  position:absolute;inset:24px;
+  border:1px dashed rgba(201,169,97,0.18);
+  border-radius:50%;
+}
+@keyframes spin{ to{transform:rotate(360deg);} }
+
+@keyframes fadeUp{ to{opacity:1; transform:translateY(0);} }
+.hero-meta, .hero-sub, .hero-actions, .hero-strip, .hero-tag { transform:translateY(20px); }
+
+@media(max-width:1100px){
+  .hero-side{display:none;}
+}
+@media(max-width:600px){
+  .hero{padding:70px 5vw 50px;min-height:auto;}
+  .line2 .word{margin-left:0;}
+  .hero-strip{gap:18px;padding:14px 18px;}
+  .strip-num{font-size:24px;}
+  .hero-tag{flex-direction:column;align-items:flex-start;gap:10px;}
+  .tag-rule{width:30px;}
+}
 
 /* === CATEGORY PILLS === */
 .cat-bar{position:sticky;top:60px;z-index:40;background:var(--cream);border-bottom:1px solid rgba(15,61,46,0.1);padding:14px 5vw;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
@@ -150,17 +436,56 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream-soft);color:var(--i
 </nav>
 
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Kutlery Ventures, Bengaluru</div>
-    <h1>Pack smart.<br><em>Serve better.</em></h1>
-    <p class="hero-sub">Everything your kitchen needs to pack, serve and run clean. We supply over 200 packaging and housekeeping items to restaurants, cafes, hotels and cloud kitchens across Bengaluru, with same day delivery.</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><span class="num">200+</span><span class="lbl">Products</span></div>
-      <div class="hero-stat"><span class="num">20</span><span class="lbl">Categories</span></div>
-      <div class="hero-stat"><span class="num">24h</span><span class="lbl">Delivery</span></div>
+  <div class="hero-bg-letters" aria-hidden="true">
+    <span class="bgl bgl1">K</span><span class="bgl bgl2">V</span>
+  </div>
+  <div class="hero-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Packaging</span><span>·</span><span>Housekeeping</span><span>·</span><span>Same Day Delivery</span><span>·</span><span>Bengaluru</span><span>·</span><span>Restaurants</span><span>·</span><span>Cafes</span><span>·</span><span>Hotels</span><span>·</span><span>Cloud Kitchens</span><span>·</span>
+      <span>Packaging</span><span>·</span><span>Housekeeping</span><span>·</span><span>Same Day Delivery</span><span>·</span><span>Bengaluru</span><span>·</span><span>Restaurants</span><span>·</span><span>Cafes</span><span>·</span><span>Hotels</span><span>·</span><span>Cloud Kitchens</span><span>·</span>
     </div>
   </div>
-  <div class="ornament"><div class="ornament-inner">Kutlery<br>Ventures<small>Bengaluru</small></div></div>
+
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span class="hero-meta-dot"></span>
+      <span class="hero-meta-text">Established in Bengaluru</span>
+    </div>
+
+    <h1 class="hero-brand">
+      <span class="brand-line line1"><span class="word w1">Kutlery</span></span>
+      <span class="brand-line line2"><span class="word w2">Ventures</span></span>
+    </h1>
+
+    <div class="hero-tag">
+      <span class="tag-rule"></span>
+      <span class="tag-text">Pack smart. <em>Serve better.</em></span>
+    </div>
+
+    <p class="hero-sub">Everything your kitchen needs to pack, serve and run clean. Over 200 packaging and housekeeping items, delivered the same day across Bengaluru.</p>
+
+    <div class="hero-actions">
+      <a href="#sec-plastic" class="hero-btn primary">Browse Catalog</a>
+      <a href="https://wa.me/919113290308?text=Hi%2C+I%27d+like+to+place+an+order" target="_blank" class="hero-btn ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+
+    <div class="hero-strip">
+      <div class="strip-item"><span class="strip-num">200+</span><span class="strip-lbl">Products</span></div>
+      <div class="strip-sep"></div>
+      <div class="strip-item"><span class="strip-num">20</span><span class="strip-lbl">Categories</span></div>
+      <div class="strip-sep"></div>
+      <div class="strip-item"><span class="strip-num">24h</span><span class="strip-lbl">Delivery</span></div>
+    </div>
+  </div>
+
+  <div class="hero-side" aria-hidden="true">
+    <div class="side-stamp">
+      <span class="stamp-arc">★ KUTLERY VENTURES · BENGALURU · SINCE EST · ★ KUTLERY VENTURES · BENGALURU · SINCE EST ·</span>
+    </div>
+  </div>
 </section>
 
 <div class="cat-bar" id="catBar"><a href="#sec-plastic-containers" class="cat-pill" data-target="sec-plastic-containers">Plastic Containers</a><a href="#sec-ripple-cups" class="cat-pill" data-target="sec-ripple-cups">Ripple Cups</a><a href="#sec-paper-cups" class="cat-pill" data-target="sec-paper-cups">Paper Cups</a><a href="#sec-paper-bowls" class="cat-pill" data-target="sec-paper-bowls">Paper Bowls</a><a href="#sec-paper-containers" class="cat-pill" data-target="sec-paper-containers">Paper Containers</a><a href="#sec-paper-plates" class="cat-pill" data-target="sec-paper-plates">Paper Plates</a><a href="#sec-sweet-boxes" class="cat-pill" data-target="sec-sweet-boxes">Sweet Boxes</a><a href="#sec-aluminium-containers" class="cat-pill" data-target="sec-aluminium-containers">Aluminium Containers</a><a href="#sec-kraft-containers" class="cat-pill" data-target="sec-kraft-containers">Kraft Containers</a><a href="#sec-cornstarch-containers" class="cat-pill" data-target="sec-cornstarch-containers">Cornstarch Containers</a><a href="#sec-bagasse-containers" class="cat-pill" data-target="sec-bagasse-containers">Bagasse Containers</a><a href="#sec-glasses" class="cat-pill" data-target="sec-glasses">Glasses</a><a href="#sec-food-grade-foils" class="cat-pill" data-target="sec-food-grade-foils">Food Grade &amp; Foils</a><a href="#sec-garbage-bags" class="cat-pill" data-target="sec-garbage-bags">Garbage Bags</a><a href="#sec-carry-bags" class="cat-pill" data-target="sec-carry-bags">Carry Bags</a><a href="#sec-meal-trays" class="cat-pill" data-target="sec-meal-trays">Meal Trays</a><a href="#sec-tissues" class="cat-pill" data-target="sec-tissues">Tissues</a><a href="#sec-wooden-bamboo" class="cat-pill" data-target="sec-wooden-bamboo">Wooden &amp; Bamboo</a><a href="#sec-specialty-items" class="cat-pill" data-target="sec-specialty-items">Specialty Items</a><a href="#sec-housekeeping" class="cat-pill" data-target="sec-housekeeping">Housekeeping</a></div>
